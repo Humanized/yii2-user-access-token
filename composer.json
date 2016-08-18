@@ -1,5 +1,5 @@
 {
-    "name": "humanized/yii2-access-token",
+    "name": "humanized/yii2-user-access-token",
     "type": "yii2-extension",
     "description": "Yii2 module which provides functionality to deal with user access tokens.",
     "keywords": ["yii2", "user","token"],
@@ -27,7 +27,7 @@
     },
     "autoload": {
         "psr-4": {
-            "humanized\\accesstoken\\": ""
+            "humanized\\useraccesstoken\\": ""
         }
     }
 }
