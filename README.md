@@ -1,2 +1,2 @@
-# yii2-user-token
-Yii2 user access token module
+# yii2-access-token
+Yii2access token module
