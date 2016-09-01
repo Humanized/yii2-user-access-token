@@ -6,15 +6,12 @@
  * @license https://github.com/humanized/yii2-access-token/LICENSE
  */
 
-namespace humanized\accesstoken;
+namespace humanized\useraccesstoken;
 
 /**
  * Yii2 User Access Token Module
  * 
- * Provides several routines and interfaces dealing with a file-based maintenance mode.
- * 
- * Maintenance mode can be toggled through CLI or through GUI by incorporating the provided widget.
- * 
+ * Provides several strategies for token-based user registration/authentication
  * 
  * 
  * @name Yii2 User Access Token Module
@@ -26,10 +23,15 @@ namespace humanized\accesstoken;
 class Module extends \yii\base\Module
 {
 
+    public $typeConfig = [
+        'enabled' => true,
+        'typeEnum' => ['default', 'facebook', 'google', 'live']
+    ];
+
     public function init()
     {
         if (\Yii::$app instanceof \yii\console\Application) {
-            $this->controllerNamespace = 'humanized\accesstoken\commands';
+            $this->controllerNamespace = 'humanized\useraccesstoken\commands';
         }
         parent::init();
     }

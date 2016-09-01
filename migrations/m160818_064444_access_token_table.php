@@ -5,7 +5,7 @@ use yii\db\Migration;
 class m160818_0644444_access_token_table extends Migration
 {
 
-    public function up()
+    public function safeUp()
     {
         $tableOptions = null;
         if ($this->db->driverName === 'mysql') {
@@ -14,17 +14,18 @@ class m160818_0644444_access_token_table extends Migration
         }
         $this->createTable('user_access_token', [
             'id' => $this->primaryKey(),
+            'type' => "ENUM('default', 'facebook','google',live')", //todo: remove hardcoding to config
             'user_id' => $this->integer(),
-            'token' => $this->string(32)->notNull(),
+            'token' => $this->string(64)->notNull(),
         ]);
         $this->addForeignKey('fk_user_access_token', 'user_access_token', 'user_id', 'user', 'id');
     }
 
-    public function down()
+    public function safeDown()
     {
         $this->dropTable('user_access_token');
 
-        return false;
+        return true;
     }
 
     /*
