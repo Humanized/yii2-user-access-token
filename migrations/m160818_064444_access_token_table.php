@@ -2,7 +2,7 @@
 
 use yii\db\Migration;
 
-class m160818_0644444_access_token_table extends Migration
+class m160818_064444_access_token_table extends Migration
 {
 
     public function safeUp()
@@ -13,11 +13,11 @@ class m160818_0644444_access_token_table extends Migration
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         }
         $this->createTable('user_access_token', [
-            'id' => $this->primaryKey(),
-            'type' => "ENUM('default', 'facebook','google',live')", //todo: remove hardcoding to config
-            'user_id' => $this->integer(),
-            'token' => $this->string(64)->notNull(),
-                ], $tableOptions);
+        'id' => $this->primaryKey(),
+        'type' => "ENUM('default', 'facebook','google','live') NOT NULL DEFAULT 'default'", //todo: remove hardcoding to config
+        'user_id' => $this->integer(),
+        'token' => $this->string(64)->notNull(),
+        ], $tableOptions);
         $this->addForeignKey('fk_user_access_token', 'user_access_token', 'user_id', '{{%user}}', 'id');
     }
 
