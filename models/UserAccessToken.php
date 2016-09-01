@@ -3,7 +3,6 @@
 namespace humanized\useraccesstoken\models;
 
 use Yii;
-use common\models\User;
 
 /**
  * This is the model class for table "user_access_token".
@@ -29,13 +28,14 @@ class UserAccessToken extends \yii\db\ActiveRecord
      */
     public function rules()
     {
+        $userClass = Yii::$app->user->identityClass;
         return [
             [['type'], 'string'],
-            [['type'], 'in', 'range' => ['default', 'facebook', 'google', 'live'],],
+            [['type'], 'in', 'range' => ['default', 'facebook', 'google', 'live'],], //Todo: sync from config
             [['user_id'], 'integer'],
             [['token'], 'required'],
             [['token'], 'string', 'max' => 64],
-            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
+            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => $userClass::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
 
