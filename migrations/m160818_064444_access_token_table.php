@@ -17,25 +17,14 @@ class m160818_0644444_access_token_table extends Migration
             'type' => "ENUM('default', 'facebook','google',live')", //todo: remove hardcoding to config
             'user_id' => $this->integer(),
             'token' => $this->string(64)->notNull(),
-        ]);
-        $this->addForeignKey('fk_user_access_token', 'user_access_token', 'user_id', 'user', 'id');
+                ], $tableOptions);
+        $this->addForeignKey('fk_user_access_token', 'user_access_token', 'user_id', '{{%user}}', 'id');
     }
 
     public function safeDown()
     {
         $this->dropTable('user_access_token');
-
         return true;
     }
 
-    /*
-      // Use safeUp/safeDown to run migration code within a transaction
-      public function safeUp()
-      {
-      }
-
-      public function safeDown()
-      {
-      }
-     */
 }
